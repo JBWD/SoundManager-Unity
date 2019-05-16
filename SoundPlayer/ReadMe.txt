@@ -2,41 +2,16 @@ Author: Weston Glasser
 Company: Card Castle Studio
 Date: May 14, 2019
 GIT Repository: 
-
-
-Documentation Website:
-
+https://github.com/JBWD/SoundManager-Unity/edit/Master/SoundPlayer/ReadMe.txt
 
 How To Videos:
-
+N/A
 
 Quick Notes:
 
 	- Setting up the Sound Manager
 
-		The SoundManager is a prefab object that will be avaiable within the SoundPlayer/Prefab folder.
-
-		It will have 2 Mixers associated within it: DestructionEvents and BackgroundMusic along with what player they are associated with.
-
-		If more Mixer for your game are required increase the size of the Mixers array and follow the step below for creating a new AudioMixer.
-
-
-
-	- Creating a new AudioMixer
-
-		Each mixer will contain a group of children that are able to play, modify and combine sounds using AudioSources. 
-		These will all go under a naming scheme with the same Prefix. This means that you can name each child anything you'd like
-		but will need to keep the beginning of each of them the same.
-
-		Example:
-		- Explosion1
-		- ExplosionSimple
-		- ExplosionComplex
-		- ExplosionSuperman
-
-		The prefix of the 'Example' will be "Explosion" and when setting up the SoundManager will be the string that is used
-		within the GroupPrefix textbox.
-
+		Drag the prefab from the prefab folder within the SoundPlayer folder and it will work automatically.
 
 
 	- Using the asset for UI
@@ -56,3 +31,12 @@ Quick Notes:
 		It has built in function(s) such as Mute/Unmute, Pause/Resume.
 
 		All of these elements can be associated with each mixer independently or effect multiple mixers at the same time.
+
+
+	- Playing Sounds in your game
+	
+		Music: For music we recommend using the TransitionSound(), this will allow only one musical piece to play at a time and provide clean transitions between the songs.
+		
+		Sounds: There are mixers made for the majority of sounds and can always be added to. Playing on a certain mixer is as easy as PlaySound(MixerPlayer.music); this allows for complete customization of volume levels. We also recommend using the PlaySoundCombined() which will allow for multiple gunshots or explosions to occur at the same time.
+
+If you have any issue please let us know on the Github page above.
