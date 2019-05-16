@@ -35,21 +35,18 @@ namespace CCS.EnumerationFlags
         /// </summary>
         public static bool HasAllFlags(T value, params T[] checkFlags)
         {
+           
             if (CheckIfEnum())
             {
                 foreach (T flag in checkFlags)
                 {
+                    
                     if (!HasFlag(value, flag))
-                    {
                         return false;
-                    }
                 }
 
             }
             return true;
         }
-
-
-
     }
 }

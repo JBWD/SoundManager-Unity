@@ -421,7 +421,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sound
       value: 
-      objectReference: {fileID: 8300000, guid: 3afc360255dcc9548855c78641d3a316, type: 3}
+      objectReference: {fileID: 8300000, guid: 3b296dc91ddadc140986b3ebbeb2bb05, type: 3}
     - target: {fileID: 8656165180821126771, guid: 711e127c0b974dd4d90a265860241fbc,
         type: 3}
       propertyPath: m_AnchorMin.x

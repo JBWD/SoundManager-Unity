@@ -12,7 +12,10 @@ namespace CCS.SoundPlayer
         public string groupPrefix;
         public AudioMixerGroup[] mixerGroups { get; set; }
         private List<AudioSource> sources = new List<AudioSource>();
+        private float currentVolume;
         private float startingVolume;
+        private float sliderValue = 1;
+
 
         public Mixer(MixerPlayer player, AudioMixer mixer, string groupPrefix)
         {
@@ -21,53 +24,71 @@ namespace CCS.SoundPlayer
             this.groupPrefix = groupPrefix;
         }
 
-
-
-
+        
         /// <summary>
         /// Creates an AudioSource for every mixer group that as a child of the sent game object.
         /// </summary>
         /// <param name="gameObject"></param>
         public void InitializeMixer(GameObject gameObject)
         {
-            //for(int i = 0;i<numberOfSources;i++)
-            //{
-            //    AudioSource source = gameObject.AddComponent<AudioSource>();
-            //    sources.Add(source);
-            //}
             mixer.GetFloat("MasterVolume", out startingVolume);
             foreach (AudioMixerGroup group in mixerGroups)
             {
                 AudioSource source = gameObject.AddComponent<AudioSource>();
                 source.outputAudioMixerGroup = group;
                 sources.Add(source);
-
             }
         }
         
+
         /// <summary>
         /// Automatically adjusts master volume level of the mixer to avoid clipping. Runs in the Update function within the SoundManager.
         /// </summary>
         public void AutoAdjustMasterLevels()
         {
             int count = 0;
-            for(int i = 0;i<sources.Count;i++)
+            foreach(AudioSource source in sources)
             {
-                if(sources[i].isPlaying)
-                {
+                if (source.isPlaying)
                     count++;
-                }
             }
             if(count > 1)
             {
-                mixer.SetFloat("MasterVolume", startingVolume - Mathf.Log(count * 3, 2));
-                Debug.Log(Mathf.Log(Mathf.Pow(2,count * count), 2));
+                AdjustMasterLevel(sliderValue,count * .03f);
             }
             else
             {
-                mixer.SetFloat("MasterVolume", startingVolume);
+                AdjustMasterLevel(sliderValue);
             }
+            
         }
+        
+
+        /// <summary>
+        /// Changes the master mixer's volume level.
+        /// </summary>
+        public void AdjustMasterLevel(float volume)
+        {
+            sliderValue = volume;
+            float currentVolume = startingVolume + Mathf.Log10(volume) * 20;
+            if(currentVolume <-80)
+            {
+                currentVolume = -80;
+            }
+            mixer.SetFloat("MasterVolume", currentVolume);
+        }
+
+        private void AdjustMasterLevel(float volume, float adjustment)
+        {
+            sliderValue = volume;
+            float currentVolume = startingVolume + Mathf.Log10(volume - adjustment) * 20;
+            if (currentVolume < -80)
+            {
+                currentVolume = -80;
+            }
+            mixer.SetFloat("MasterVolume", currentVolume);
+        }
+
 
         /// <summary>
         /// Adds an outside audiosouce that can be controlled by the SoundManager.
@@ -123,7 +144,6 @@ namespace CCS.SoundPlayer
         /// <param name="pitch"></param>
         public void PlayCombinedSound(AudioClip sound, float pitch)
         {
-
             //Checks to see if the source is not playing - automatically choses this option instead of stopping a sound.
             foreach (AudioSource source in sources)
             {
@@ -148,10 +168,6 @@ namespace CCS.SoundPlayer
             if (sourceToUse == null)
                 return;
             sourceToUse.PlayOneShot(sound);
-            //sourceToUse.pitch = pitch;
-            //sourceToUse.clip = sound;
-            //sourceToUse.Play();
-
         }
 
 
@@ -164,7 +180,6 @@ namespace CCS.SoundPlayer
         /// <param name="pitch"></param>
         public AudioSource OverridePlaySound(AudioClip sound, float pitch)
         {
-
             //Checks to see if the source is not playing - automatically choses this option instead of stopping a sound.
             foreach (AudioSource source in sources)
             {

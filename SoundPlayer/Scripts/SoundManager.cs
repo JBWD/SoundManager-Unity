@@ -51,7 +51,7 @@ namespace CCS.SoundPlayer
             for(int i = 0;i<mixerPrefixes.Length;i++)
             {
                 mixers[i] = new Mixer(mixerTypes[i],(AudioMixer)Resources.Load("Mixers/"+mixerResourceNames[i]),mixerPrefixes[i]);
-                Debug.Log(mixers[i].mixer);
+
             }
 
 
@@ -323,10 +323,10 @@ namespace CCS.SoundPlayer
         /// <param name="volumeLevel"></param>
         public void AdjustMasterVolume(float volumeLevel)
         {
+            
             foreach (Mixer m in mixers)
             {
-
-                m.AdjustVolume(volumeLevel);
+                m.AdjustMasterLevel(volumeLevel);
             }
         }
 
@@ -338,11 +338,17 @@ namespace CCS.SoundPlayer
         /// <param name="volumeLevel"></param>
         public void AdjustVolume(MixerPlayer player, float volumeLevel)
         {
+            if (EnumFlags<MixerPlayer>.HasAllFlags(player, MixerPlayer.Dialog , MixerPlayer.Explosions , MixerPlayer.Instantiations , MixerPlayer.Interactions , MixerPlayer.Movement , MixerPlayer.Music))
+            {
+                AdjustMasterVolume(volumeLevel);
+                return;
+            }
 
             foreach (Mixer m in mixers)
             {
                 if (EnumFlags<MixerPlayer>.HasFlag(m.player, player))
                 {
+
                     m.AdjustVolume(volumeLevel);
                 }
 
