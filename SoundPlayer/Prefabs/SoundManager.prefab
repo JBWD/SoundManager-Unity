@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3508417388901968212
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3508417388901968209}
+  - component: {fileID: 3508417388901968210}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3508417388901968209
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3508417388901968212}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.7535934, y: 6.8757563, z: 3.354294}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3508417388901968210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3508417388901968212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5665b9314792af1498f3a943e84134b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixers:
+  - player: 1
+    mixer: {fileID: 24100000, guid: c237477341f9c5248aacf6d887fd8931, type: 2}
+    groupPrefix: Explosion
+  - player: 8
+    mixer: {fileID: 24100000, guid: d2d42e47054afcb48bc5213541748279, type: 2}
+    groupPrefix: Music
+  - player: 2
+    mixer: {fileID: 24100000, guid: 04ddadaf796b84443979f0423934e428, type: 2}
+    groupPrefix: Instantiation
+  - player: 4
+    mixer: {fileID: 24100000, guid: 9cb16b8a034f6e24c84e0911875f8b00, type: 2}
+    groupPrefix: Movement
+  - player: 16
+    mixer: {fileID: 24100000, guid: 2460cf20796a13e4bb8dd7607ce5cb69, type: 2}
+    groupPrefix: Interaction
+  - player: 32
+    mixer: {fileID: 24100000, guid: bae893fa3c9d5e3458299f9d3b7c17d2, type: 2}
+    groupPrefix: Dialog
