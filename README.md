@@ -43,3 +43,4 @@ Under your associated GameObjects click 'AddComponent' and type in any of the fo
 
 These will have built in functions that are applied on startup to control the corresponding mixers.
 
+![alt text](https://user-images.githubusercontent.com/35278058/57865550-664a8a80-77c3-11e9-8a32-bcf2c783cbd7.PNG "SoundSlider")
